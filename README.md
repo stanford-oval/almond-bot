@@ -18,12 +18,12 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 - Install modules
 
     ```bash
-    npm install
+    yarn
     ```
 - Start the bot
 
     ```bash
-    npm start
+    yarn start
     ```
 
 ## Testing the bot using Bot Framework Emulator
@@ -44,7 +44,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 
     ```bash
     # build the TypeScript bot before you publish
-    npm run build
+    yarn build
     ```
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
