@@ -30,6 +30,102 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
+"@microsoft/recognizers-text-choice@1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@microsoft/recognizers-text-choice/-/recognizers-text-choice-1.1.2.tgz#f4759bc1214cdac677d87402208069cbc0c60f88"
+  integrity sha512-4hFdqxusM0YrOXYM2RVYPl2rLjItSh6VkRiACjWB95GKC/DBGjJRYQpTxhzuZAsJSkDMinu/aLf8DvQtwUaLtA==
+  dependencies:
+    "@microsoft/recognizers-text" "~1.1.2"
+    grapheme-splitter "^1.0.2"
+
+"@microsoft/recognizers-text-choice@~1.1.2":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@microsoft/recognizers-text-choice/-/recognizers-text-choice-1.1.4.tgz#8e9ae8f804ae49bd57dd6bbf227a2ab0e14a9041"
+  integrity sha512-4CddwFe4RVhZeJgW65ocBrEdeukBMghK8pgI0K0Qy2eA5ysPZQpeZ7BGSDz5QMQei5LPY+QaAQ3CHU+ORHoO7A==
+  dependencies:
+    "@microsoft/recognizers-text" "~1.1.4"
+    grapheme-splitter "^1.0.2"
+
+"@microsoft/recognizers-text-date-time@1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@microsoft/recognizers-text-date-time/-/recognizers-text-date-time-1.1.2.tgz#a55f94856e621ca7e390158c916ca6d33e5888f0"
+  integrity sha512-tsdsl2Z3OMFhfWicFQSS4sbk/c0pVTIXhCglDXm/cfSNuQgNgy2NFFRquiQ6MkVwiIk2I7k76TnkoDZt7PD4Dg==
+  dependencies:
+    "@microsoft/recognizers-text" "~1.1.2"
+    "@microsoft/recognizers-text-number" "~1.1.2"
+    "@microsoft/recognizers-text-number-with-unit" "~1.1.2"
+    lodash.isequal "^4.5.0"
+    lodash.tonumber "^4.0.3"
+
+"@microsoft/recognizers-text-date-time@~1.1.2":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@microsoft/recognizers-text-date-time/-/recognizers-text-date-time-1.1.4.tgz#d3ccddbc9b9f81bfa564df5b957dbdd740036425"
+  integrity sha512-leMnjN+KYNwNvRD5T4G0ORUzkjlek/BBZDvQIjAujtyrd/pkViUnuouWIPkFT/dbSOxXML8et54CSk2KfHiWIA==
+  dependencies:
+    "@microsoft/recognizers-text" "~1.1.4"
+    "@microsoft/recognizers-text-number" "~1.1.4"
+    "@microsoft/recognizers-text-number-with-unit" "~1.1.4"
+    lodash.isequal "^4.5.0"
+    lodash.tonumber "^4.0.3"
+
+"@microsoft/recognizers-text-number-with-unit@~1.1.2", "@microsoft/recognizers-text-number-with-unit@~1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@microsoft/recognizers-text-number-with-unit/-/recognizers-text-number-with-unit-1.1.4.tgz#a7f2614d419adb2fea99e5c324151ea455262aa8"
+  integrity sha512-zl+CfmfWK0x/x+iSgaBAevKTYO0F4+z7SYHAHztaaaGuX8FERw2jmUjSgVetm5KA3EveyCx0XYGU1mRNY8p7Eg==
+  dependencies:
+    "@microsoft/recognizers-text" "~1.1.4"
+    "@microsoft/recognizers-text-number" "~1.1.4"
+    lodash.escaperegexp "^4.1.2"
+    lodash.last "^3.0.0"
+    lodash.max "^4.0.1"
+
+"@microsoft/recognizers-text-number@1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@microsoft/recognizers-text-number/-/recognizers-text-number-1.1.2.tgz#b7275cf540ba018e0225c5d5e07ec0b0435267ec"
+  integrity sha512-GESjSF42dllym83diyd6pmlzFwdzidewoq/qSQz89lSoTx9HdJQHjbXxwdBp7w4Ax/Jroo2lcAedM3B7alZhYQ==
+  dependencies:
+    "@microsoft/recognizers-text" "~1.1.2"
+    bignumber.js "^7.2.1"
+    lodash.escaperegexp "^4.1.2"
+    lodash.sortby "^4.7.0"
+    lodash.trimend "^4.5.1"
+
+"@microsoft/recognizers-text-number@~1.1.2", "@microsoft/recognizers-text-number@~1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@microsoft/recognizers-text-number/-/recognizers-text-number-1.1.4.tgz#1fbe0473322e6292bb93f9af86c6ca5ce05212d9"
+  integrity sha512-6EmlR+HR+eJBIX7sQby1vs6LJB64wxLowHaGpIU9OCXFvZ5Nb0QT8qh10rC40v3Mtrz4DpScXfSXr9tWkIO5MQ==
+  dependencies:
+    "@microsoft/recognizers-text" "~1.1.4"
+    bignumber.js "^7.2.1"
+    lodash.escaperegexp "^4.1.2"
+    lodash.sortby "^4.7.0"
+    lodash.trimend "^4.5.1"
+
+"@microsoft/recognizers-text-sequence@~1.1.2":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@microsoft/recognizers-text-sequence/-/recognizers-text-sequence-1.1.4.tgz#339f38292ba207cd78ee27defeea1ab79206fa5d"
+  integrity sha512-rb5j8/aE7HSOdIxaVfCGFrj0wWPpSq0CuykFg/A/iJNPP+FnAU71bgP5HexrwQcpCsDinauisX7u0DKIChrHRA==
+  dependencies:
+    "@microsoft/recognizers-text" "~1.1.4"
+    grapheme-splitter "^1.0.2"
+
+"@microsoft/recognizers-text-suite@1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@microsoft/recognizers-text-suite/-/recognizers-text-suite-1.1.2.tgz#dac45c5cd80ddd312ad39c146d0324b66d7e664f"
+  integrity sha512-w3WCsKa//64jE1fGPFlV02rRg9+b3oDp+K5/skPAn4KDr80LjXxD1ulIgiJ2Ll/2OoBl8ociCiCjYA7zS3LpdQ==
+  dependencies:
+    "@microsoft/recognizers-text" "~1.1.2"
+    "@microsoft/recognizers-text-choice" "~1.1.2"
+    "@microsoft/recognizers-text-date-time" "~1.1.2"
+    "@microsoft/recognizers-text-number" "~1.1.2"
+    "@microsoft/recognizers-text-number-with-unit" "~1.1.2"
+    "@microsoft/recognizers-text-sequence" "~1.1.2"
+
+"@microsoft/recognizers-text@~1.1.2", "@microsoft/recognizers-text@~1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@microsoft/recognizers-text/-/recognizers-text-1.1.4.tgz#264530f748b2cad3fac54d53538f88ad2bf99b7e"
+  integrity sha512-hlSVXcaX5i8JcjuUJpVxmy2Z/GxvFXarF0KVySCFop57wNEnrLWMHe4I4DjP866G19VyIKRw+vPA32pkGhZgTg==
+
 "@netflix/nerror@^1.0.0":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@netflix/nerror/-/nerror-1.1.2.tgz#4b82eb4d168e97edb52b9834b0dde8ebf38684c1"
@@ -246,6 +342,11 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
+bignumber.js@^7.2.1:
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-7.2.1.tgz#80c048759d826800807c4bfd521e50edbba57a5f"
+  integrity sha512-S4XzBk5sMB+Rcb/LNcpzXr57VRTxgAvaAEDAl1AwRx27j00hT84O6OkteE7u8UB3NuaaygCRrEpqox4uDOrbdQ==
+
 binary-extensions@^1.0.0:
   version "1.13.1"
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-1.13.1.tgz#598afe54755b2868a5330d2aff9d4ebb53209b65"
@@ -258,6 +359,18 @@ botbuilder-core@^4.5.3:
   dependencies:
     assert "^1.4.1"
     botframework-schema "^4.5.3"
+
+botbuilder-dialogs@^4.5.3:
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/botbuilder-dialogs/-/botbuilder-dialogs-4.5.3.tgz#cf2723bc527b06065fc9fbf2a8ca3426fad7cd37"
+  integrity sha512-uwbCInkZCQiH6+SIh9O1KTyAYXWguC9If45n1GzWZOBflvQHjU0sXMWysIqPFZfR/rsYxAYJOo5o+Hiy0hqEsQ==
+  dependencies:
+    "@microsoft/recognizers-text-choice" "1.1.2"
+    "@microsoft/recognizers-text-date-time" "1.1.2"
+    "@microsoft/recognizers-text-number" "1.1.2"
+    "@microsoft/recognizers-text-suite" "1.1.2"
+    "@types/node" "^10.12.18"
+    botbuilder-core "^4.5.3"
 
 botbuilder@~4.5.1:
   version "4.5.3"
@@ -1161,6 +1274,11 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.6:
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.2.tgz#6f0952605d0140c1cfdb138ed005775b92d67b02"
   integrity sha512-IItsdsea19BoLC7ELy13q1iJFNmd7ofZH5+X/pJr90/nRoPEX0DJo1dHDbgtYWOhJhcCgMDTOw84RZ72q6lB+Q==
 
+grapheme-splitter@^1.0.2:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/grapheme-splitter/-/grapheme-splitter-1.0.4.tgz#9cf3a665c6247479896834af35cf1dbb4400767e"
+  integrity sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==
+
 handle-thing@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/handle-thing/-/handle-thing-2.0.0.tgz#0e039695ff50c93fc288557d696f3c1dc6776754"
@@ -1662,6 +1780,11 @@ locate-path@^3.0.0:
     p-locate "^3.0.0"
     path-exists "^3.0.0"
 
+lodash.escaperegexp@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/lodash.escaperegexp/-/lodash.escaperegexp-4.1.2.tgz#64762c48618082518ac3df4ccf5d5886dae20347"
+  integrity sha1-ZHYsSGGAglGKw99Mz11YhtriA0c=
+
 lodash.includes@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/lodash.includes/-/lodash.includes-4.3.0.tgz#60bb98a87cb923c68ca1e51325483314849f553f"
@@ -1671,6 +1794,11 @@ lodash.isboolean@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/lodash.isboolean/-/lodash.isboolean-3.0.3.tgz#6c2e171db2a257cd96802fd43b01b20d5f5870f6"
   integrity sha1-bC4XHbKiV82WgC/UOwGyDV9YcPY=
+
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+  integrity sha1-QVxEePK8wwEgwizhDtMib30+GOA=
 
 lodash.isinteger@^4.0.4:
   version "4.0.4"
@@ -1692,10 +1820,35 @@ lodash.isstring@^4.0.1:
   resolved "https://registry.yarnpkg.com/lodash.isstring/-/lodash.isstring-4.0.1.tgz#d527dfb5456eca7cc9bb95d5daeaf88ba54a5451"
   integrity sha1-1SfftUVuynzJu5XV2ur4i6VKVFE=
 
+lodash.last@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/lodash.last/-/lodash.last-3.0.0.tgz#242f663112dd4c6e63728c60a3c909d1bdadbd4c"
+  integrity sha1-JC9mMRLdTG5jcoxgo8kJ0b2tvUw=
+
+lodash.max@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/lodash.max/-/lodash.max-4.0.1.tgz#8735566c618b35a9f760520b487ae79658af136a"
+  integrity sha1-hzVWbGGLNan3YFILSHrnllivE2o=
+
 lodash.once@^4.0.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
   integrity sha1-DdOXEhPHxW34gJd9UEyI+0cal6w=
+
+lodash.sortby@^4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
+  integrity sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=
+
+lodash.tonumber@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/lodash.tonumber/-/lodash.tonumber-4.0.3.tgz#0b96b31b35672793eb7f5a63ee791f1b9e9025d9"
+  integrity sha1-C5azGzVnJ5Prf1pj7nkfG56QJdk=
+
+lodash.trimend@^4.5.1:
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/lodash.trimend/-/lodash.trimend-4.5.1.tgz#12804437286b98cad8996b79414e11300114082f"
+  integrity sha1-EoBENyhrmMrYmWt5QU4RMAEUCC8=
 
 lodash@^4.17.11, lodash@^4.17.15, lodash@^4.17.5:
   version "4.17.15"
