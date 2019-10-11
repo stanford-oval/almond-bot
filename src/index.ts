@@ -1,6 +1,6 @@
-import { config } from 'dotenv';
-import * as path from 'path';
-import * as restify from 'restify';
+import { config } from "dotenv";
+import * as path from "path";
+import * as restify from "restify";
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
@@ -8,14 +8,15 @@ import {
   BotFrameworkAdapter,
   ConversationState,
   MemoryStorage,
-  UserState
-} from 'botbuilder';
+  UserState,
+  PrivateConversationState
+} from "botbuilder";
 
 // This bot's main dialog.
-import AlmondBot from './bots/almondBot';
-import MainDialog from './dialogs/mainDialog';
+import AlmondBot from "./bots/almondBot";
+import MainDialog from "./dialogs/mainDialog";
 
-const ENV_FILE = path.join(__dirname, '..', '.env');
+const ENV_FILE = path.join(__dirname, "..", ".env");
 config({ path: ENV_FILE });
 
 // Define the state store for your bot.
@@ -26,12 +27,18 @@ const memoryStorage = new MemoryStorage();
 // Create conversation and user state with in-memory storage provider.
 const conversationState = new ConversationState(memoryStorage);
 const userState = new UserState(memoryStorage);
+const privateConversationState = new PrivateConversationState(memoryStorage);
 
 // Create the main dialog.
 const dialog = new MainDialog();
 
 // Create the bot that will handle incoming messages
-const bot = new AlmondBot(conversationState, userState, dialog);
+const bot = new AlmondBot(
+  conversationState,
+  userState,
+  privateConversationState,
+  dialog
+);
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
@@ -57,7 +64,7 @@ server.listen(process.env.port || process.env.PORT || 3978, () => {
 });
 
 // Listen for incoming requests.
-server.post('/api/messages', (req, res) => {
+server.post("/api/messages", (req, res) => {
   adapter.processActivity(req, res, async context => {
     // Route to main dialog.
     await bot.run(context);

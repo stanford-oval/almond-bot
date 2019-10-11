@@ -3,15 +3,18 @@ import {
   DialogSet,
   DialogTurnStatus,
   OAuthPrompt,
-  WaterfallDialog
-} from 'botbuilder-dialogs';
+  WaterfallDialog,
+  TextPrompt
+} from "botbuilder-dialogs";
 
-import LogoutDialog from './logoutDialog';
+import LogoutDialog from "./logoutDialog";
 
-const CONFIRM_PROMPT = 'ConfirmPrompt';
-const MAIN_DIALOG = 'MainDialog';
-const MAIN_WATERFALL_DIALOG = 'MainWaterfallDialog';
-const OAUTH_PROMPT = 'OAuthPrompt';
+const CONFIRM_PROMPT = "ConfirmPrompt";
+const MAIN_DIALOG = "MainDialog";
+const MAIN_WATERFALL_DIALOG = "MainWaterfallDialog";
+const OAUTH_PROMPT = "OAuthPrompt";
+const ALMOND_DIALOG = "AlmondDialog";
+const ALMOND_TEXT_PROMPT = "AlmondTextPrompt";
 
 export default class MainDialog extends LogoutDialog {
   constructor() {
@@ -20,8 +23,8 @@ export default class MainDialog extends LogoutDialog {
     this.addDialog(
       new OAuthPrompt(OAUTH_PROMPT, {
         connectionName: process.env.connectionName,
-        text: 'Please Sign In',
-        title: 'Sign In',
+        text: "Please Sign In",
+        title: "Sign In",
         timeout: 300000
       })
     );
@@ -29,11 +32,16 @@ export default class MainDialog extends LogoutDialog {
     this.addDialog(
       new WaterfallDialog(MAIN_WATERFALL_DIALOG, [
         this.promptStep.bind(this),
-        this.loginStep.bind(this),
-        this.displayTokenPhase1.bind(this),
-        this.displayTokenPhase2.bind(this)
+        this.loginStep.bind(this)
       ])
     );
+    this.addDialog(
+      new WaterfallDialog(ALMOND_DIALOG, [
+        this.commandStep.bind(this),
+        this.almondStep.bind(this)
+      ])
+    );
+    this.addDialog(new TextPrompt(ALMOND_TEXT_PROMPT));
 
     this.initialDialogId = MAIN_WATERFALL_DIALOG;
   }
@@ -62,21 +70,31 @@ export default class MainDialog extends LogoutDialog {
     // Get the token from the previous step. Note that we could also have gotten the
     // token directly from the prompt itself. There is an example of this in the next method.
     const tokenResponse = stepContext.result;
-    if (tokenResponse) {
-      await stepContext.context.sendActivity('You are now logged in.');
-      return await stepContext.prompt(
-        CONFIRM_PROMPT,
-        'Would you like to view your token?'
+    if (!tokenResponse) {
+      await stepContext.context.sendActivity(
+        "Login was not successful please try again."
       );
+      return await stepContext.endDialog();
     }
-    await stepContext.context.sendActivity(
-      'Login was not successful please try again.'
-    );
-    return await stepContext.endDialog();
+    await stepContext.context.sendActivity("You are now logged in.");
+    await stepContext.context.sendActivity("What can I do for you?");
+
+    return await stepContext.beginDialog(ALMOND_DIALOG);
+  }
+
+  public async commandStep(stepContext) {
+    return await stepContext.prompt(ALMOND_TEXT_PROMPT);
+  }
+
+  public async almondStep(stepContext) {
+    // Query Almond Server and return result
+
+    await stepContext.context.sendActivity(stepContext.result);
+    return await stepContext.replaceDialog(ALMOND_DIALOG);
   }
 
   public async displayTokenPhase1(stepContext) {
-    await stepContext.context.sendActivity('Thank you.');
+    await stepContext.context.sendActivity("Thank you.");
 
     const result = stepContext.result;
     if (result) {
