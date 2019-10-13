@@ -21,8 +21,10 @@
         "botbuilder": "~4.5.1",
         "botbuilder-dialogs": "^4.5.3",
         "dotenv": "~8.0.0",
+        "isomorphic-ws": "^4.0.1",
         "replace": "~1.1.0",
-        "restify": "~8.3.3"
+        "restify": "~8.3.3",
+        "ws": "^7.1.2"
     },
     "devDependencies": {
         "@types/dotenv": "6.1.1",

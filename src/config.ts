@@ -1,4 +1,4 @@
-const WEB_ALMOND_URL = '';
+const WEB_ALMOND_URL = 'https://almond.stanford.edu';
 
 const Config = {
   WEB_ALMOND_URL

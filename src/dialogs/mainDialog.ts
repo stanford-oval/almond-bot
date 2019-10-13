@@ -17,6 +17,8 @@ const ALMOND_DIALOG = "AlmondDialog";
 const ALMOND_TEXT_PROMPT = "AlmondTextPrompt";
 
 export default class MainDialog extends LogoutDialog {
+  private dialogState;
+
   constructor() {
     super(MAIN_DIALOG, process.env.connectionName);
 
@@ -52,6 +54,8 @@ export default class MainDialog extends LogoutDialog {
    * @param {*} dialogContext
    */
   public async run(context, accessor) {
+    this.dialogState = accessor;
+
     const dialogSet = new DialogSet(accessor);
     dialogSet.add(this);
 
@@ -76,6 +80,10 @@ export default class MainDialog extends LogoutDialog {
       );
       return await stepContext.endDialog();
     }
+
+    // save token in state
+    this.dialogState.authToken = tokenResponse.token;
+
     await stepContext.context.sendActivity("You are now logged in.");
     await stepContext.context.sendActivity("What can I do for you?");
 
