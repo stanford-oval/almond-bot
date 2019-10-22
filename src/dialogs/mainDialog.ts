@@ -5,16 +5,17 @@ import {
   OAuthPrompt,
   WaterfallDialog,
   TextPrompt
-} from "botbuilder-dialogs";
+} from 'botbuilder-dialogs';
 
-import LogoutDialog from "./logoutDialog";
+import LogoutDialog from './logoutDialog';
+import axios from 'axios';
 
-const CONFIRM_PROMPT = "ConfirmPrompt";
-const MAIN_DIALOG = "MainDialog";
-const MAIN_WATERFALL_DIALOG = "MainWaterfallDialog";
-const OAUTH_PROMPT = "OAuthPrompt";
-const ALMOND_DIALOG = "AlmondDialog";
-const ALMOND_TEXT_PROMPT = "AlmondTextPrompt";
+const CONFIRM_PROMPT = 'ConfirmPrompt';
+const MAIN_DIALOG = 'MainDialog';
+const MAIN_WATERFALL_DIALOG = 'MainWaterfallDialog';
+const OAUTH_PROMPT = 'OAuthPrompt';
+const ALMOND_DIALOG = 'AlmondDialog';
+const ALMOND_TEXT_PROMPT = 'AlmondTextPrompt';
 
 export default class MainDialog extends LogoutDialog {
   private dialogState;
@@ -25,8 +26,8 @@ export default class MainDialog extends LogoutDialog {
     this.addDialog(
       new OAuthPrompt(OAUTH_PROMPT, {
         connectionName: process.env.connectionName,
-        text: "Please Sign In",
-        title: "Sign In",
+        text: 'Please Sign In',
+        title: 'Sign In',
         timeout: 300000
       })
     );
@@ -76,7 +77,7 @@ export default class MainDialog extends LogoutDialog {
     const tokenResponse = stepContext.result;
     if (!tokenResponse) {
       await stepContext.context.sendActivity(
-        "Login was not successful please try again."
+        'Login was not successful please try again.'
       );
       return await stepContext.endDialog();
     }
@@ -84,8 +85,8 @@ export default class MainDialog extends LogoutDialog {
     // save token in state
     this.dialogState.authToken = tokenResponse.token;
 
-    await stepContext.context.sendActivity("You are now logged in.");
-    await stepContext.context.sendActivity("What can I do for you?");
+    await stepContext.context.sendActivity('You are now logged in.');
+    await stepContext.context.sendActivity('What can I do for you?');
 
     return await stepContext.beginDialog(ALMOND_DIALOG);
   }
@@ -102,7 +103,7 @@ export default class MainDialog extends LogoutDialog {
   }
 
   public async displayTokenPhase1(stepContext) {
-    await stepContext.context.sendActivity("Thank you.");
+    await stepContext.context.sendActivity('Thank you.');
 
     const result = stepContext.result;
     if (result) {
