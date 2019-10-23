@@ -1,7 +1,7 @@
-const WEB_ALMOND_URL = 'https://almond.stanford.edu';
+const ALMOND_API_URL = 'https://almond.stanford.edu/me/api';
 
 const Config = {
-  WEB_ALMOND_URL
+  ALMOND_API_URL
 };
 
 export default Config;

@@ -5,16 +5,18 @@ import {
   OAuthPrompt,
   WaterfallDialog,
   TextPrompt
-} from "botbuilder-dialogs";
+} from 'botbuilder-dialogs';
+import axios from 'axios';
+import Config from '../config';
 
-import LogoutDialog from "./logoutDialog";
+import LogoutDialog from './logoutDialog';
 
-const CONFIRM_PROMPT = "ConfirmPrompt";
-const MAIN_DIALOG = "MainDialog";
-const MAIN_WATERFALL_DIALOG = "MainWaterfallDialog";
-const OAUTH_PROMPT = "OAuthPrompt";
-const ALMOND_DIALOG = "AlmondDialog";
-const ALMOND_TEXT_PROMPT = "AlmondTextPrompt";
+const CONFIRM_PROMPT = 'ConfirmPrompt';
+const MAIN_DIALOG = 'MainDialog';
+const MAIN_WATERFALL_DIALOG = 'MainWaterfallDialog';
+const OAUTH_PROMPT = 'OAuthPrompt';
+const ALMOND_DIALOG = 'AlmondDialog';
+const ALMOND_TEXT_PROMPT = 'AlmondTextPrompt';
 
 export default class MainDialog extends LogoutDialog {
   private dialogState;
@@ -25,8 +27,8 @@ export default class MainDialog extends LogoutDialog {
     this.addDialog(
       new OAuthPrompt(OAUTH_PROMPT, {
         connectionName: process.env.connectionName,
-        text: "Please Sign In",
-        title: "Sign In",
+        text: 'Please Sign In',
+        title: 'Sign In',
         timeout: 300000
       })
     );
@@ -76,7 +78,7 @@ export default class MainDialog extends LogoutDialog {
     const tokenResponse = stepContext.result;
     if (!tokenResponse) {
       await stepContext.context.sendActivity(
-        "Login was not successful please try again."
+        'Login was not successful please try again.'
       );
       return await stepContext.endDialog();
     }
@@ -84,8 +86,8 @@ export default class MainDialog extends LogoutDialog {
     // save token in state
     this.dialogState.authToken = tokenResponse.token;
 
-    await stepContext.context.sendActivity("You are now logged in.");
-    await stepContext.context.sendActivity("What can I do for you?");
+    await stepContext.context.sendActivity('You are now logged in.');
+    await stepContext.context.sendActivity('What can I do for you?');
 
     return await stepContext.beginDialog(ALMOND_DIALOG);
   }
@@ -96,36 +98,48 @@ export default class MainDialog extends LogoutDialog {
 
   public async almondStep(stepContext) {
     // Query Almond Server and return result
+    const request = {
+      command: {
+        type: 'command',
+        text: stepContext.result
+      },
+    };
+    const config = {
+      baseURL: Config.ALMOND_API_URL,
+      headers: {
+        Authorization: `Bearer ${this.dialogState.authToken}`
+      }
+    };
 
-    await stepContext.context.sendActivity(stepContext.result);
+    await axios
+      .post('/converse', request, config)
+      .then(async (res: any) => {
+        // store conversation token
+        this.dialogState.conversationId = res.conversationId;
+
+        // sequential message execution
+        res.messages.reduce(
+          (p: any, msg: any) =>
+            p.then(_ => this.displayMessage(msg, stepContext)),
+          Promise.resolve()
+        );
+      })
+      .catch(async err => {
+        console.log(err);
+        await stepContext.context.sendActivity(`Can't reach Almond: ${err}`);
+      });
+
     return await stepContext.replaceDialog(ALMOND_DIALOG);
   }
 
-  public async displayTokenPhase1(stepContext) {
-    await stepContext.context.sendActivity("Thank you.");
-
-    const result = stepContext.result;
-    if (result) {
-      // Call the prompt again because we need the token. The reasons for this are:
-      // 1. If the user is already logged in we do not need to store the token locally in the bot and worry
-      // about refreshing it. We can always just call the prompt again to get the token.
-      // 2. We never know how long it will take a user to respond. By the time the
-      // user responds the token may have expired. The user would then be prompted to login again.
-      //
-      // There is no reason to store the token locally in the bot because we can always just call
-      // the OAuth prompt to get the token or get a new token if needed.
-      return await stepContext.beginDialog(OAUTH_PROMPT);
+  private async displayMessage(msg: any, stepContext: any) {
+    switch (msg.type) {
+      case 'text':
+        await stepContext.context.sendActivity(msg.text);
+        break;
+      default:
+        await stepContext.context.sendActivity('Unsupported Almond message type.');
+        throw 'Unsupported message type.';
     }
-    return await stepContext.endDialog();
-  }
-
-  public async displayTokenPhase2(stepContext) {
-    const tokenResponse = stepContext.result;
-    if (tokenResponse) {
-      await stepContext.context.sendActivity(
-        `Here is your token ${tokenResponse.token}`
-      );
-    }
-    return await stepContext.endDialog();
   }
 }
