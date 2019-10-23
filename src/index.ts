@@ -3,10 +3,6 @@ import { config } from "dotenv";
 const ENV_FILE = path.join(__dirname, "..", ".env");
 config({ path: ENV_FILE });
 
-// Azure App Insights
-import * as appInsights from 'applicationinsights';
-appInsights.setup(process.env.INSTRUMENTATION_KEY);
-
 import * as restify from "restify";
 
 // Import required bot services.
