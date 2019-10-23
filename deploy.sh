@@ -10,7 +10,8 @@ yarn build
 az login
 az account set --subscription "${SUBSCRIPTION}"
 az bot create --kind webapp --resource-group "${RESOURCE_GROUP_NAME}" --name "${WEB_APP_NAME}" --appid "${APP_ID}" --password "${APP_PASSWORD}" --tags "connectionName=Almond" --lang Javascript
-rm src/web.config
-az bot prepare-deploy --code-dir "./src" --lang Typescript
-zip -r code.zip .
+rm -f web.config
+az bot prepare-deploy --code-dir "." --lang Typescript
+rm -f code.zip
+zip -r code.zip src
 az webapp deployment source config-zip --resource-group "${RESOURCE_GROUP_NAME}" --name "${WEB_APP_NAME}" --src "code.zip"
