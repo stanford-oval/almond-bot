@@ -1,5 +1,5 @@
 node_modules
 lib
 .env
-deploy.sh
 code.zip
+src/web.config
