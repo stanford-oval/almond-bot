@@ -5,7 +5,7 @@ WEB_APP_NAME="almond-bot"
 APP_ID=$ALMOND_APP_ID
 APP_PASSWORD=$ALMOND_APP_PASSWORD
 
-yarn build
+npm run build
 
 az login
 az account set --subscription "${SUBSCRIPTION}"
@@ -14,5 +14,5 @@ az bot create --kind webapp --resource-group "${RESOURCE_GROUP_NAME}" --name "${
 rm -f web.config
 az bot prepare-deploy --code-dir "." --lang Typescript
 rm -f code.zip
-zip -r code.zip src
+zip -r code.zip . -x ".git/*"
 az webapp deployment source config-zip --resource-group "${RESOURCE_GROUP_NAME}" --name "${WEB_APP_NAME}" --src "code.zip"
