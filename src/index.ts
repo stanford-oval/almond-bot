@@ -1,5 +1,8 @@
-import { config } from "dotenv";
 import * as path from "path";
+import { config } from "dotenv";
+const ENV_FILE = path.join(__dirname, "..", ".env");
+config({ path: ENV_FILE });
+
 import * as restify from "restify";
 
 // Import required bot services.
@@ -16,8 +19,7 @@ import {
 import AlmondBot from "./bots/almondBot";
 import MainDialog from "./dialogs/mainDialog";
 
-const ENV_FILE = path.join(__dirname, "..", ".env");
-config({ path: ENV_FILE });
+
 
 // Define the state store for your bot.
 // See https://aka.ms/about-bot-state to learn more about using MemoryStorage.
