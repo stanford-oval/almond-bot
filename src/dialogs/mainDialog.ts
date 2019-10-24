@@ -92,9 +92,9 @@ export default class MainDialog extends LogoutDialog {
     }
 
     // save token in state if in prod, otherwise load from env
-    this.dialogState.authToken = process.env.TemporaryOAuthToken
-      ? process.env.TemporaryOAuthToken
-      : tokenResponse.token;
+    this.dialogState.authToken = tokenResponse.token;
+    // comment out below if in prod. If in dev, keep.
+    // this.dialogState.authToken = process.env.TemporaryOAuthToken;
 
     await stepContext.context.sendActivity('You are now logged in.');
     await stepContext.context.sendActivity('What can I do for you?');

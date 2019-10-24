@@ -53,6 +53,10 @@ export default class AlmondBot extends ActivityHandler {
 
     this.onMessage(async (context, next) => {
       console.log('Running dialog with Message Activity.');
+
+      // Run the Dialog with the new message Activity.
+      await this.dialog.run(context, this.dialogState);
+
       await next();
     });
 
