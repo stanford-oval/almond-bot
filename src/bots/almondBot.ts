@@ -53,10 +53,6 @@ export default class AlmondBot extends ActivityHandler {
 
     this.onMessage(async (context, next) => {
       console.log('Running dialog with Message Activity.');
-
-      // Run the Dialog with the new message Activity.
-      await this.dialog.run(context, this.dialogState);
-
       await next();
     });
 
@@ -74,11 +70,11 @@ export default class AlmondBot extends ActivityHandler {
       for (const member of membersAdded) {
         if (member.id !== context.activity.recipient.id) {
           await context.sendActivity("Hi, I'm Almond!");
-          await context.sendActivity('Type anything to get logged in.');
-          await context.sendActivity('Or type "logout" to sign-out.');
+
+          // Run the Dialog with the new message Activity.
+          await this.dialog.run(context, this.dialogState);
         }
       }
-
       await next();
     });
 
