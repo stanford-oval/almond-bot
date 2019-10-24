@@ -83,8 +83,10 @@ export default class MainDialog extends LogoutDialog {
       return await stepContext.endDialog();
     }
 
-    // save token in state
-    this.dialogState.authToken = tokenResponse.token;
+    // save token in state if in prod, otherwise load from env
+    this.dialogState.authToken = process.env.TemporaryOAuthToken
+      ? process.env.TemporaryOAuthToken
+      : tokenResponse.token;
 
     await stepContext.context.sendActivity('You are now logged in.');
     await stepContext.context.sendActivity('What can I do for you?');
@@ -100,9 +102,9 @@ export default class MainDialog extends LogoutDialog {
     // Query Almond Server and return result
     const request = {
       command: {
-        type: 'command',
-        text: stepContext.result
-      },
+        text: stepContext.result,
+        type: 'command'
+      }
     };
     const config = {
       baseURL: Config.ALMOND_API_URL,
@@ -114,17 +116,21 @@ export default class MainDialog extends LogoutDialog {
     await axios
       .post('/converse', request, config)
       .then(async (res: any) => {
+        console.log(res.data);
+
         // store conversation token
-        this.dialogState.conversationId = res.conversationId;
+        this.dialogState.conversationId = res.data.conversationId;
 
         // sequential message execution
-        res.messages.reduce(
+        res.data.messages.reduce(
           (p: any, msg: any) =>
-            p.then(_ => this.displayMessage(msg, stepContext)),
+            p.then(_ => {
+              this.handleMessage(msg, stepContext).catch((_: any) => null);
+            }),
           Promise.resolve()
         );
       })
-      .catch(async err => {
+      .catch(async (err: any) => {
         console.log(err);
         await stepContext.context.sendActivity(`Can't reach Almond: ${err}`);
       });
@@ -132,14 +138,16 @@ export default class MainDialog extends LogoutDialog {
     return await stepContext.replaceDialog(ALMOND_DIALOG);
   }
 
-  private async displayMessage(msg: any, stepContext: any) {
+  private async handleMessage(msg: any, stepContext: any) {
     switch (msg.type) {
       case 'text':
         await stepContext.context.sendActivity(msg.text);
         break;
       default:
-        await stepContext.context.sendActivity('Unsupported Almond message type.');
-        throw 'Unsupported message type.';
+        await stepContext.context.sendActivity(
+          'Unsupported Almond message type.'
+        );
+        throw new Error('Unsupported message type.');
     }
   }
 }
